@@ -27,7 +27,7 @@ input.addEventListener('input',  (ev: Event)  => {
     let val = (ev.target as HTMLInputElement).value;
 
     if(val.length === 0){
-        return;
+        //return;
     }
 
     const sr = search(masterIndex, (ev.target as HTMLInputElement).value);
@@ -91,15 +91,15 @@ function materialize(query: string, sr: NodeSearchResult): Array<string> {
         Array.from(current.node.childs)
         .sort((a, b) => { 
             if (a[0] > b[0]) {
-                return 1;
-              } else if (a[0] < b[0]) {
                 return -1;
+              } else if (a[0] < b[0]) {
+                return 1;
               } else if (a[0] === b[0]) {
                 return 0;
               }
         })
         .forEach((v) => {
-            q.push({prev: (current.prev + v[0]), node: v[1]})
+            q.unshift({prev: (current.prev + v[0]), node: v[1]})
         })
 
 
